@@ -20,7 +20,6 @@ const app = express();
 
 app.set("views", path.join(__dirname, "views"));
 
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
