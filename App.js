@@ -18,6 +18,7 @@ cloudinary.config({
 
 const app = express();
 
+app.set("views", path.join(__dirname, "views"));
 
 
 // Middleware
