@@ -13,7 +13,7 @@
     }
   ],
   "includeFiles": [
-    "views/**,
-    "public/**
+    "views/**",
+    "public/**"
   ]
 }
