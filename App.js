@@ -17,6 +17,14 @@ cloudinary.config({
 
 const app = express();
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// Sample route
+app.get("/", (req, res) => {
+  res.render("index", { message: null });
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
