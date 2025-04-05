@@ -48,13 +48,13 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 10px;
     }
     
     header {
       display: flex;
       justify-content: center;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     
     .logo {
@@ -407,7 +407,7 @@
     
     @media (max-width: 480px) {
       .app-container {
-        padding: 10px;
+        padding: 5px;
       }
 
       header {
@@ -415,7 +415,7 @@
       }
       
       .booth-frame {
-        padding: 15px;
+        padding: 10px;
       }
       
       .logo h1 {
