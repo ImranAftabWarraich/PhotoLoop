@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     message: null,
     imageUrl: null,
-    eventName: "Photo Memories",
+    eventName: "Pam Production Orlando",
   });
 });
 
