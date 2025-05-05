@@ -37,6 +37,11 @@
               </div>
             </div>
             
+            <!-- Add this inside the preview-container div, before the countdown div -->
+            <div 
+              id="timer-display" class="timer hidden">00:00
+            </div>
+            
             <div id="countdown" class="hidden">
               <span>3</span>
             </div>
@@ -46,14 +51,15 @@
           
           <div class="controls">
             <button id="capture-btn" class="main-btn">Take Photo</button>
+            <!-- Add this inside the controls div, after the existing buttons -->
             <div class="secondary-controls">
               <button id="upload-btn" class="action-btn" disabled>Upload</button>
               <button id="retake-btn" class="action-btn" disabled>Retake</button>
+              <button id="switch-camera-btn" class="action-btn" disabled>Switch Camera</button>
+              <button id="record-btn" class="action-btn">Record Video</button>
             </div>
-            <!-- Add this file input for image upload -->
-            <input type="file" id="file-input" accept="image/*" style="display: none;">
+            <input type="file" id="file-input" accept="image/, video/*" style="display: none;">
             <button id="upload-from-device" class="action-btn">Upload from Device</button>
-          </div>
           </div>
         </div>
         
