@@ -2,9 +2,6 @@
 console.log('main.js loaded');
 let loadingScreenForced = false;
 
-let currentFacingMode = 'user'; // Start with front camera
-const switchCameraBtn = document.getElementById('switch-camera-btn');
-
 // Force the loading screen to close after a timeout as a fallback
 setTimeout(() => {
   if (!loadingScreenForced) {
@@ -135,67 +132,6 @@ if (uploadFromDeviceBtn) {
     fileInput.click();
   });
 }
-
-if (switchCameraBtn) {
-  switchCameraBtn.addEventListener('click', () => {
-    switchCamera();
-  });
-}
-
-function switchCamera() {
-  // Toggle facing mode
-  currentFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
-  
-  // Stop current stream tracks
-  if (cameraStream) {
-    cameraStream.getTracks().forEach(track => {
-      track.stop();
-    });
-  }
-  
-  // Re-initialize camera with new facing mode
-  console.log(`Switching camera to ${currentFacingMode} mode`);
-  
-  const constraints = {
-    video: { 
-      facingMode: currentFacingMode,
-    },
-    audio: document.body.classList.contains('video-mode')
-  };
-  
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(stream => {
-      cameraStream = stream;
-      
-      // Create video element with proper CSS for mirroring
-      const video = document.createElement('video');
-      video.srcObject = stream;
-      video.setAttribute('playsinline', true);
-      video.setAttribute('autoplay', true);
-      video.style.width = '100%';
-      video.style.height = '100%';
-      video.style.objectFit = 'cover';
-      
-      // Handle mirroring - only mirror the front camera
-      if (currentFacingMode === 'user') {
-        video.style.transform = 'scaleX(-1)';
-      } else {
-        video.style.transform = 'scaleX(1)';
-      }
-      
-      // Clear camera feed and add video
-      cameraFeed.innerHTML = '';
-      cameraFeed.appendChild(video);
-      video.play();
-    })
-    .catch(error => {
-      console.error('Error switching camera:', error);
-      showError('Failed to switch camera. Your device might not support multiple cameras.');
-      // Reset to previous mode on error
-      currentFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
-    });
-}
-
 
 // Handle file selection
 if (fileInput) {
@@ -380,9 +316,7 @@ if (uploadBtn) {
     console.log(`Initializing camera (with audio: ${withAudio})`);
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const constraints = { 
-        video: {
-          facingMode: currentFacingMode
-        },
+        video: true,
         audio: withAudio
       };
       
@@ -400,18 +334,10 @@ if (uploadBtn) {
           video.style.height = '100%';
           video.style.objectFit = 'cover';
           
-          // Apply mirroring only for front camera
-          if (currentFacingMode === 'user') {
-            video.style.transform = 'scaleX(-1)';
-          }
-          
           // Clear camera placeholder and add video
           cameraFeed.innerHTML = '';
           cameraFeed.appendChild(video);
           video.play();
-          
-          // Enable the switch camera button
-          if (switchCameraBtn) switchCameraBtn.disabled = false;
           
           // Update button text based on mode
           if (document.body.classList.contains('video-mode')) {
